@@ -2,7 +2,7 @@ FROM python:alpine3.19
 
 WORKDIR /raspiProjekt
 
-COPY ./requirements.txt /raspiProjekt/requirements.txt
+COPY ./requirements-backend.txt /raspiProjekt/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /raspiProjekt/requirements.txt
 

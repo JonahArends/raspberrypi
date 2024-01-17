@@ -9,6 +9,17 @@ body, html {
     overflow: hidden;
 }
 
+#scriptframe_body {
+    text-align: start;
+}
+
+#scriptframe_body {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 1px;
+    margin: 0px;
+}
+
 h1 {
     font-weight: bold;
     font-size: 75px;
@@ -74,9 +85,9 @@ button:hover {
 }
 
 div#scriptframe {
-    visibility: hidden;
+    /* visibility: hidden; */
     /* border: 2px solid white; */
-    height: 76vh;
+    height: 70vh;
 }
 
 div#scriptframe iframe {
