@@ -4,8 +4,7 @@
 import os
 import signal
 import subprocess
-from multiprocessing import process
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket
 # from fastapi.middleware.cors import CORSMiddleware
 
 from src.hardware import bmp280, ttp223, ky020
@@ -27,13 +26,15 @@ api = FastAPI()
 '''to do'''
 
 ### START PROGRAMM
-@api.get('/run')
-async def run():
+@api.websocket("/run")
+async def run_endpoint(websocket: WebSocket):
+    await websocket.accept()
     if not process['id']:
-        sp = subprocess.Popen(['python3', './raspiProject.py'])
+        sp = subprocess.Popen(['python3', './raspiProject.py'], stdout=subprocess.PIPE)
         process['id'] = sp.pid
-        return True
-    return False
+        while True:
+            output = sp.stdout.readline().decode('utf-8')
+            await websocket.send_text(output)
 
 ### STOP PROGRAMM
 @api.get('/kill')
@@ -44,13 +45,17 @@ async def kill():
     return False
 
 ### TEST PROGRAMM
-@api.get('/test')
-async def test():
+@api.websocket("/test")
+async def test_endpoint(websocket: WebSocket):
+    await websocket.accept()
     if process['id']:
         os.kill(process['id'], signal.SIGTERM)
     if not process['id']:
-        sp = subprocess.Popen(['python3', './raspiProject.py', '--test'])
+        sp = subprocess.Popen(['python3', './raspiProject.py', '--test'], stdout=subprocess.PIPE)
         process['id'] = sp.pid
+        while True:
+            output = sp.stdout.readline().decode('utf-8')
+            await websocket.send_text(output)
 
 ### TEMPERATURE
 @api.get('/temperature')
