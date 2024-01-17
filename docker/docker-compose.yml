@@ -1,0 +1,19 @@
+services:
+  backend:
+    container_name: sensors-backend
+    image: ...
+    devices:
+      - /dev/gpiomem:/dev/gpiomem
+    privileged: true
+
+  frontend:
+    container_name: sensors-frontend
+    image: ...
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+
+networks:
+  default:
+    name: sensors
