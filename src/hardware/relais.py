@@ -1,4 +1,5 @@
 ##### RASPI RELAIS MODULE #####
+'''Controll relais on raspberry pi'''
 
 ### IMPORTS
 from time import sleep

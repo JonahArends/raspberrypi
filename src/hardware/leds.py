@@ -1,5 +1,5 @@
 ##### RASPI LED MODULE #####
-''''''
+'''Controll LEDs on raspberry pi'''
 
 ### IMPORTS
 from time import sleep
