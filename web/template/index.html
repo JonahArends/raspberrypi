@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- {{ turbo() }} -->
     <link rel="stylesheet" href="assets/css/style.css">
     
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
@@ -23,24 +22,30 @@
     </div>
     <div class="container">
         <div id="buttons">
-            <button type="button">Start</button>
-            <button type="button">Stop</button>
-            <button type="button">Test</button>
+            <button type="button" title="Start the python-script on the raspberry pi">Start</button>
+            <button type="button" title="Stop the python-script on the raspberry pi">Stop</button>
+        </div>
+        <div id="testscript">
+            <button type="button" title="Test the python-script on the raspberry pi">Test</button>
+            <button type="button" title="Download the latest test-report">Download</button>
         </div>
         <div id="states">
-            <button type="button">Check states</button>
+            <button type="button" title="Check the states of the sensors">Check states</button>
         </div>
         <div id="output">
-            <h2 id="temperature">Temperature: {{ temperature }}°C</h2>
+            <h2 id="temperature" title="Temperature by the BMP280-sensor">Temperature: {{ temperature }}</h2>
         </div>
     </div>
     <div id="scriptframe">
         <iframe id="mainframe" src="assets/pages/script.html" frameborder="1" scrolling="yes"></iframe>
     </div>
     <footer>
-        <a href="https://github.com/JonahArends/raspberrypi" target="_blank" rel="noopener noreferrer">
-            <button type="button" id="github" ></button>
-        </a>
+        <div id="madeby">
+            <a href="https://github.com/JonahArends/raspberrypi" target="_blank" rel="noopener noreferrer">
+                <button type="button" id="github" title="Github-repository with the source-code of this app"></button>
+            </a>
+        <!-- made by Jonah Arends -->
+        </div>
     </footer>
     <script src="assets/js/index.js"></script>
 </body>

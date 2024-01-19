@@ -1,10 +1,11 @@
-##### FASTAPI #####
+##### FASTAPI API CODE #####
 
 ### IMPORTS
 import os
 import signal
 import subprocess
 from fastapi import FastAPI, WebSocket
+from fastapi.responses import FileResponse
 # from fastapi.middleware.cors import CORSMiddleware
 
 from src.hardware import bmp280, ttp223, ky020
@@ -25,6 +26,9 @@ api = FastAPI()
 ### SECURITY
 '''to do'''
 
+### API STARTUP
+@api.on_event('startup')
+
 ### START PROGRAMM
 @api.websocket("/run")
 async def run_endpoint(websocket: WebSocket):
@@ -41,6 +45,14 @@ async def run_endpoint(websocket: WebSocket):
 async def kill():
     if process['id']:
         os.kill(process['id'], signal.SIGTERM)
+        process['id'] = None
+        return True
+    return False
+
+### CHECK PROGRAMM STATE
+@api.get('/check')
+async def check():
+    if process['id']:
         return True
     return False
 
@@ -56,6 +68,17 @@ async def test_endpoint(websocket: WebSocket):
         while True:
             output = sp.stdout.readline().decode('utf-8')
             await websocket.send_text(output)
+
+### LIST REPORTS
+@api.get('/reports/list')
+async def list_reports():
+    reports = os.listdir('src/tests/reports/')
+    return reports
+
+### GET REPORT
+@api.get('/reports/{filename}')
+async def download_report(filename: str):
+    return FileResponse(path=f'src/tests/reports/{filename}', media_type='application/octet-stream')
 
 ### TEMPERATURE
 @api.get('/temperature')
