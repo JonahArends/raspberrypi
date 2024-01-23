@@ -4,7 +4,7 @@ WORKDIR /raspiProjekt
 
 COPY docker/requirments-backend.txt /raspiProjekt/requirments.txt
 
-RUN apt-get update && apt-get upgrade -y && pip install --no-chache -r /raspiProjekt/requirments.txt
+RUN apt-get update && apt-get upgrade -y && pip install --no-chache --verbose -r /raspiProjekt/requirments.txt
 
 COPY ./src /raspiProjekt/src
 
