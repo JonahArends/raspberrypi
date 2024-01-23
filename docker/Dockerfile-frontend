@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY docker/requirments-backend.txt /app/requirments.txt
 
-RUN pip install --no-chache --update -r /app/requirments-frontend.txt
+RUN pip install -r /app/requirments.txt
 
 COPY ./web /app/src
 
