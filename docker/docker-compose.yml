@@ -1,0 +1,27 @@
+services:
+  backend:
+    container_name: sensors-backend
+    image: ...
+    devices:
+      - /dev/gpiomem:/dev/gpiomem
+    privileged: true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 86400s
+      start_period: 20s
+      timeout: 10s
+      retries: 5
+
+
+  frontend:
+    container_name: sensors-frontend
+    image: ...
+    ports:
+      - 80:80
+    depends_on:
+      backend:
+        condition: service_healthy
+
+networks:
+  default:
+    name: sensors
