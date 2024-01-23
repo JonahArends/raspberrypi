@@ -33,8 +33,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: docker/Dockerfile-backend
+          context: docker
+          file: Dockerfile-backend
           platforms: linux/arm/v7
           push: true
           tags: ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors:backend
@@ -68,8 +68,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: docker/Dockerfile-frontend
+          context: docker
+          file: Dockerfile-frontend
           platforms: linux/arm/v7
           push: true
           tags: ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors:frontend
