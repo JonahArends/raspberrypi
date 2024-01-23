@@ -4,7 +4,13 @@ WORKDIR /raspiProjekt
 
 COPY docker/requirments-backend.txt /raspiProjekt/requirments.txt
 
-RUN pip install -r /raspiProjekt/requirments.txt
+# RUN pip install -r /raspiProjekt/requirments.txt
+RUN pip install --no-chache fastapi
+RUN pip install --no-chache pydantic
+RUN pip install --no-chache uvicorn
+RUN pip install --no-chache RPi.GPIO
+RUN pip install --no-chache board
+RUN pip install --no-chache adafruit_bmp280
 
 COPY ./src /raspiProjekt/src
 
