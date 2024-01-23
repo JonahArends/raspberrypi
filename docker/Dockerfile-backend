@@ -4,7 +4,7 @@ WORKDIR /raspiProjekt
 
 COPY docker/requirments-backend.txt /raspiProjekt/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r /raspiProjekt/requirements-backend.txt
+RUN pip install --no-cache-dir -r /raspiProjekt/requirements-backend.txt
 
 COPY ./src /raspiProjekt/src
 

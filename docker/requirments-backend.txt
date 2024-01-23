@@ -1,6 +1,6 @@
 fastapi
 pydantic
-uvicorn[standard]
+uvicorn
 RPi.GPIO
 board
 adafruit_bmp280
