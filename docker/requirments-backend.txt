@@ -1,6 +1,0 @@
-fastapi
-pydantic
-uvicorn
-RPi.GPIO
-board
-adafruit_bmp280
