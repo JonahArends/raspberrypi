@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
-    <link rel="manifest" href="assets/img/site.webmanifest">
-    <link rel="mask-icon" href="assets/img/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/img/favicon-16x16.png">
+    <link rel="manifest" href="static/img/site.webmanifest">
+    <link rel="mask-icon" href="static/img/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     
@@ -27,17 +29,22 @@
         </div>
         <div id="testscript">
             <button type="button" title="Test the python-script on the raspberry pi">Test</button>
-            <button type="button" title="Download the latest test-report">Download</button>
+            <button type="button" id="download-button" title="Download the latest test-report">Reports</button>
+            <div id="dialog">
+                <h2 id="title-dialog">Choose the report(s) to download</h2>
+                <div id="checkbox-dialog"></div>
+                <button type="submit" id="download-button-dialog" title="Click to download">Download</button>
+            </div>
         </div>
         <div id="states">
             <button type="button" title="Check the states of the sensors">Check states</button>
         </div>
         <div id="output">
-            <h2 id="temperature" title="Temperature by the BMP280-sensor">Temperature: {{ temperature }}</h2>
+            <h2 id="temperature" title="Temperature by the BMP280-sensor"></h2>
         </div>
     </div>
     <div id="scriptframe">
-        <iframe id="mainframe" src="assets/pages/script.html" frameborder="1" scrolling="yes"></iframe>
+        <iframe id="mainframe" src="static/pages/script.html" frameborder="1" scrolling="yes"></iframe>
     </div>
     <footer>
         <div id="madeby">
@@ -47,6 +54,6 @@
         <!-- made by Jonah Arends -->
         </div>
     </footer>
-    <script src="assets/js/index.js"></script>
+    <script src="static/js/index.js"></script>
 </body>
 </html>

@@ -26,9 +26,6 @@ api = FastAPI()
 ### SECURITY
 '''to do'''
 
-### API STARTUP
-@api.on_event('startup')
-
 ### START PROGRAMM
 @api.websocket("/run")
 async def run_endpoint(websocket: WebSocket):

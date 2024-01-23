@@ -43,6 +43,47 @@ div#headline:hover {
     cursor: default;
 }
 
+#dialog {
+    background-color: rgba(0, 128, 0, 0.223);
+    border: 2px solid rgba(0, 128, 0, 0.475);
+    border-radius: 10px;
+    cursor: default;
+    width: 1000px;
+    height: 1000px;
+}
+
+#title-dialog {
+    font-size: 20px;
+    text-shadow: -2px -2px 2px green;
+}
+
+#checkbox-dialog .api-checkbox {
+    float: left;
+    display: block;
+    margin: 5px;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+}
+
+#checkbox-dialog label {
+    display: flex;
+    cursor: pointer;
+    font-size: 20px;
+    text-shadow: -2px -2px 2px green;
+    margin: 5px;
+}
+
+div#dialog button {
+    font-size: 20px;
+    /* visibility: hidden; */
+    display: none;
+}
+
+.ui-button {
+    font-size: 20px;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -55,7 +96,7 @@ div#headline:hover {
 div#output h2 {
     margin-top: 15px;
     margin-left: 5px;
-    text-align: left;
+    /* text-align: left; */
     text-shadow: -2px -2px 2px green;
     font-size: 28px;
     font-weight: lighter;
@@ -87,7 +128,7 @@ button:hover {
 }
 
 div#scriptframe {
-    /* visibility: hidden; */
+    visibility: hidden;
     /* border: 2px solid white; */
     height: 70vh;
 }
