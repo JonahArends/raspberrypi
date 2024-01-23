@@ -2,9 +2,9 @@ FROM python:alpine3.19
 
 WORKDIR /raspiProjekt
 
-COPY requirments-backend.txt /raspiProjekt/requirements.txt
+COPY docker/requirments-backend.txt /raspiProjekt/requirements.txt
 
-RUN pip install --upgrade pip && pip install --no-cache-dir --upgrade -r /raspiProjekt/requirements-backend.txt
+RUN pip install --no-cache-dir --upgrade -r /raspiProjekt/requirements-backend.txt
 
 COPY ./src /raspiProjekt/src
 
