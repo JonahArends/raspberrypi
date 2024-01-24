@@ -29,9 +29,13 @@ jobs:
         with:
           base_image: raspbian_lite:latest
           commands: |
-              apt-get update && apt-get -y upgrade && apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-              docker build --compress --no-cache --file /docker/Dockerfile-backend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
-              docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
+              sudo apt-get update && \
+              sudo apt-get -y upgrade && \
+              sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \
+              sudo docker build --compress --no-cache \ 
+              --file /docker/Dockerfile-backend \ 
+              --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest && \
+              sudo docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
 
   build-and-push-frontend:
     runs-on: ubuntu-latest
@@ -58,6 +62,10 @@ jobs:
         with:
           base_image: raspbian_lite:latest
           commands: |
-              apt-get update && apt-get -y upgrade && apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-              docker build --compress --no-cache --file /docker/Dockerfile-backend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
-              docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
+              sudo apt-get update && \
+              sudo apt-get -y upgrade && \
+              sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \
+              sudo docker build --compress --no-cache \ 
+              --file /docker/Dockerfile-backend \ 
+              --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest && \
+              sudo docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
