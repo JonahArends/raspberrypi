@@ -63,5 +63,5 @@ jobs:
               sudo apt-get update && \
               sudo apt-get -y upgrade && \
               sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \
-              sudo docker build --compress --no-cache --file /docker/Dockerfile-frontend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-frontendd:latest && \
+              sudo docker build --compress --no-cache --file /docker/Dockerfile-frontend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-frontend:latest && \
               sudo docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-frontend:latest
