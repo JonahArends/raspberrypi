@@ -29,7 +29,8 @@ jobs:
         with:
           base_image: raspbian_lite:latest
           commands: |
-              docker build --file /docker/Dockerfile-backend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
+              apt-get update && apt-get -y upgrade && apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+              docker build --compress --no-cache --file /docker/Dockerfile-backend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
               docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
 
   build-and-push-frontend:
@@ -57,5 +58,6 @@ jobs:
         with:
           base_image: raspbian_lite:latest
           commands: |
-              docker build --file /docker/Dockerfile-frontend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-frontend:latest
-              docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-frontend:latest
+              apt-get update && apt-get -y upgrade && apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+              docker build --compress --no-cache --file /docker/Dockerfile-backend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
+              docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
