@@ -27,14 +27,12 @@ jobs:
       - name: Build and push Docker image
         uses: pguyot/arm-runner-action@v2
         with:
-          base_image: raspbian_lite:latest
+          base_image: raspi_4_bookworm:20230612
           commands: |
               sudo apt-get update && \
               sudo apt-get -y upgrade && \
               sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \
-              sudo docker build --compress --no-cache \ 
-              --file /docker/Dockerfile-backend \ 
-              --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest && \
+              sudo docker build --compress --no-cache --file /docker/Dockerfile-backend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest && \
               sudo docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-backend:latest
 
   build-and-push-frontend:
@@ -60,12 +58,10 @@ jobs:
       - name: Build and push Docker image
         uses: pguyot/arm-runner-action@v2
         with:
-          base_image: raspbian_lite:latest
+          base_image: raspi_4_bookworm:20230612
           commands: |
               sudo apt-get update && \
               sudo apt-get -y upgrade && \
               sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \
-              sudo docker build --compress --no-cache \ 
-              --file /docker/Dockerfile-frontend \ 
-              --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-frontendd:latest && \
+              sudo docker build --compress --no-cache --file /docker/Dockerfile-frontend --tag ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-frontendd:latest && \
               sudo docker push ghcr.io/${{ steps.lowercase.outputs.repo }}-sensors-frontend:latest
