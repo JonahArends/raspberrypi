@@ -7,7 +7,10 @@ from time import sleep
 import RPi.GPIO as GPIO
 import subprocess
 import uvicorn
+import sys
 
+
+sys.path.append('src')
 from hardware import bmp280, ttp223, ky020
 from hardware.leds import LED
 from hardware.relais import RELAIS
@@ -21,8 +24,7 @@ GPIO_PINS = {
 
     'TOUCH_PIN': 19,
     'TILT_PIN': 13,
-    'FAN_PIN': 4,
-}
+    'FAN_PIN': 4}
 
 ### LEDS
 led = LED(led_pins=[GPIO_PINS['RED'], GPIO_PINS['YELLOW'], GPIO_PINS['GREEN'], GPIO_PINS['ORANGE']])
