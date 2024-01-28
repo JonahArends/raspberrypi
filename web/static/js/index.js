@@ -10,7 +10,7 @@ setInterval(function() {
             console.log(error);
         }
     });
-}, 2500);
+}, 5000);
 
 $(document).on('change', '.api-checkbox', function() {
     var anyChecked = $('.api-checkbox:checked').length > 0;
