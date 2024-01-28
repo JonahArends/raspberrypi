@@ -6,3 +6,4 @@ flask
 flask-sock
 websocket-client
 gunicorn
+aiohttp

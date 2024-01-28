@@ -3,6 +3,8 @@
 ### IMPORTS
 import requests
 import websocket
+import aiohttp
+import asyncio
 from flask import Flask, render_template, request
 from flask_sock import Sock
 
@@ -13,6 +15,17 @@ API_URL = f'http://{API_BASE}'
 ### APP
 app = Flask(__name__)
 sock = Sock(app)
+
+### FETCH
+async def fetch(session, url):
+    async with session.get(url) as response:
+        return await response.text()
+    
+async def update_temperature():
+    async with aiohttp.ClientSession() as session:
+        html = await fetch(session, f'{API_URL}/temperature')
+        temperature = f'{html}°C'
+        return temperature
 
 ### START SCRIPT
 @sock.route('/start')
@@ -48,14 +61,16 @@ def test_script(ws):
 ### UPDATE TEMPERATURE
 @app.route('/temperature', methods=['GET'])
 def update_temperature():
-    response = requests.get(f'{API_URL}/temperature', timeout=30)
-    temperature = f'{response.text}°C'
-    return temperature
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    result = loop.run_until_complete(update_temperature())
+    loop.close()
+    return result
 
 ### REPORTS LIST
 @app.route('/listreports', methods=['GET'])
 def list_reports():
-    response = requests.get(f'{API_URL}/reports/list', timeout=30)
+    response = requests.get(f'{API_URL}/reports/list', timeout=60)
     data = response.txt
     return data
 
@@ -65,7 +80,7 @@ def download_files():
     checkboxes = request.get_json()
     files = []
     for checkbox in checkboxes:
-        response = requests.get(f'{API_URL}/reports/' + checkbox, timeout=30)
+        response = requests.get(f'{API_URL}/reports/' + checkbox, timeout=60)
         files.append((checkbox, response.content))
     return zip(files)
 
