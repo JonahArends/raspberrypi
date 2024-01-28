@@ -6,7 +6,7 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO
 
 ### VARS
-API_URL = 'http://127.0.0.1:8000'
+API_URL = 'http://127.0.0.1:5000'
 
 ### APP
 app = Flask(__name__)
@@ -43,4 +43,4 @@ def root():
 
 ### RUN APP
 if __name__ == '__main__':
-    app.run(port=80)
+    app.run(port=8000)
