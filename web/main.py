@@ -3,14 +3,17 @@
 ### IMPORTS
 import requests
 from flask import Flask, render_template, request
-from flask_socketio import SocketIO
 
 ### VARS
 API_URL = 'http://127.0.0.1:5000'
 
 ### APP
 app = Flask(__name__)
-socketio = SocketIO(app)
+
+### START SCRIPT
+@app.route('/script/start', methods=['GET'])
+def start_script():
+    
 
 ### UPDATE TEMPERATURE
 @app.route('/temperature', methods=['GET'])

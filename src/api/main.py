@@ -42,12 +42,7 @@ async def run_endpoint(websocket: WebSocket):
 ### STOP PROGRAMM
 @app.get('/kill')
 async def kill():
-    # if process['id']:
-    #     os.kill(process['id'], signal.SIGTERM)
-    #     process['id'] = None
-    #     return True
     subprocess.call(['python3', './raspiProject.py', '--kill'], shell=True)
-    return False
 
 ### CHECK PROGRAMM STATE
 @app.get('/check')
