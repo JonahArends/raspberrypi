@@ -15,7 +15,7 @@ app = Flask(__name__)
 ### START SCRIPT
 @app.route('/start', methods=['GET'])
 def start_script():
-    ws = websocket.create_connection("ws://API_BASE/run")
+    ws = websocket.create_connection(f"ws://{API_BASE}/run")
     result = ws.recv()
     ws.close()
     return result
@@ -28,7 +28,7 @@ def stop_script():
 ### TEST SCRIPT
 @app.route('/test', methods=['GET'])
 def test_script():
-    ws = websocket.create_connection("ws://API_BASE/test")
+    ws = websocket.create_connection(f"ws://{API_BASE}/test")
     result = ws.recv()
     ws.close()
     return result
