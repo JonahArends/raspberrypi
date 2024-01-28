@@ -2,15 +2,17 @@
 
 ### IMPORTS
 import os
+import sys
 import signal
 import subprocess
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import FileResponse
 # from fastapi.middleware.cors import CORSMiddleware
 
-from src.hardware import bmp280, ttp223, ky020
-from src.raspiProject import GPIO_PINS
-from src.hardware.relais import RELAIS
+sys.path.append('src/hardware')
+from hardware import bmp280, ttp223, ky020
+from raspiProject import GPIO_PINS
+from hardware.relais import RELAIS
 
 ### VARS
 process = {'id': None}
