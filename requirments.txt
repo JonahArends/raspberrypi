@@ -3,4 +3,5 @@ uvicorn
 adafruit-circuitpython-bmp280
 requests
 flask
+flask-sock
 websocket-client

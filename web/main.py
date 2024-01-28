@@ -4,6 +4,7 @@
 import requests
 import websocket
 from flask import Flask, render_template, request
+from flask_sock import Sock
 
 ### VARS
 API_BASE = '127.0.0.1:5000'
@@ -11,17 +12,16 @@ API_URL = f'http://{API_BASE}'
 
 ### APP
 app = Flask(__name__)
+sock = Sock(app)
 
 ### START SCRIPT
-@app.route('/start', methods=['GET'])
-def start_script():
-    ws = websocket.create_connection(f"ws://{API_BASE}/run")
+@sock.route('/start')
+def start_script(ws):
+    ws_url = f"ws://{API_BASE}/run"
+    ws_client = websocket.create_connection(ws_url)
     while True:
-        result = ws.recv()
-        if result:
-            break
-    ws.close()
-    return result
+        message = ws_client.recv()
+        ws.send(message)
 
 ### STOP SCRIPT
 @app.route('/stop', methods=['POST'])
@@ -29,15 +29,13 @@ def stop_script():
     requests.post(f'{API_URL}/kill', timeout=10)
 
 ### TEST SCRIPT
-@app.route('/test', methods=['GET'])
-def test_script():
-    ws = websocket.create_connection(f"ws://{API_BASE}/test")
+@sock.route('/test')
+def start_script(ws):
+    ws_url = f"ws://{API_BASE}/test"
+    ws_client = websocket.create_connection(ws_url)
     while True:
-        result = ws.recv()
-        if result:
-            break
-    ws.close()
-    return result
+        message = ws_client.recv()
+        ws.send(message)
 
 ### UPDATE TEMPERATURE
 @app.route('/temperature', methods=['GET'])
