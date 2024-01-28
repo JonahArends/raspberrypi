@@ -101,7 +101,7 @@ def main():
         print('Test runs')
     elif args.api:
         print('API runs')
-        uvicorn.run('src/api/main.py:app', host='0.0.0.0', port=8000)
+        uvicorn.run('api/main.py:app', host='0.0.0.0', port=8000)
     elif args.run:
         print('Script runs')
         temperature_thread = Thread(target=temperature_tasks, daemon=True)
