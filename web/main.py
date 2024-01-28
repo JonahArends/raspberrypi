@@ -33,6 +33,7 @@ async def start_script(ws):
 @app.route('/stop', methods=['POST'])
 async def stop_script():
     requests.post(f'{API_URL}/kill', timeout=10)
+    return True
 
 ### TEST SCRIPT
 @sock.route('/test')
