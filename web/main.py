@@ -13,7 +13,7 @@ API_URL = f'http://{API_BASE}'
 app = Flask(__name__)
 
 ### START SCRIPT
-@app.route('/script/start', methods=['GET'])
+@app.route('/start', methods=['GET'])
 def start_script():
     ws = websocket.create_connection("ws://API_BASE/run")
     result = ws.recv()
@@ -21,12 +21,12 @@ def start_script():
     return result
 
 ### STOP SCRIPT
-@app.route('/script/stop', methods=['POST'])
+@app.route('/stop', methods=['POST'])
 def stop_script():
     requests.post(f'{API_URL}/kill', timeout=10)
 
 ### TEST SCRIPT
-@app.route('/script/test', methods=['GET'])
+@app.route('/test', methods=['GET'])
 def test_script():
     ws = websocket.create_connection("ws://API_BASE/test")
     result = ws.recv()

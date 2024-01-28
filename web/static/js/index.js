@@ -92,7 +92,7 @@ $(document).ready(function() {
 
     $('#startbutton').click(function() {
         var loc = window.location;
-        var wsUrl = ((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + loc.pathname + "/script/start";
+        var wsUrl = ((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + loc.pathname + "/start";
         ws = new WebSocket(wsUrl);
 
         ws.onopen = function() {
@@ -120,7 +120,7 @@ $(document).ready(function() {
         }
         $('#websocket').hide();
         $.ajax({
-            url: '/script/stop',
+            url: '/stop',
             type: 'POST',
             success: function(response) {
                 console.log('POST request successful');
@@ -133,7 +133,7 @@ $(document).ready(function() {
 
     $('#testbutton').click(function() {
         var loc = window.location;
-        var wsUrl = ((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + loc.pathname + "/script/start";
+        var wsUrl = ((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + loc.pathname + "/test";
         ws = new WebSocket(wsUrl);
 
         ws.onopen = function() {
