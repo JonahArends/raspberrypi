@@ -10,7 +10,7 @@ def run_api():
     subprocess.call('python src/raspiProject.py --api', shell=True)
 
 def run_web():
-    subprocess.call('python web/main.py', shell=True)
+    subprocess.call('gunicorn -w 4 -b 0.0.0.0:8000 web.main:app', shell=True)
 
 ### THREADS
 api_thread = Thread(target=run_api)
