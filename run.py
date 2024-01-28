@@ -6,10 +6,10 @@ from threading import Thread
 
 ### START TASKS
 def run_api():
-    subprocess.call('src/raspiProject.py --api', shell=True)
+    subprocess.call('python src/raspiProject.py --api', shell=True)
 
 def run_web():
-    subprocess.call('web/main.py', shell=True)
+    subprocess.call('python web/main.py', shell=True)
 
 ### THREADS
 api_thread = Thread(target=run_api)
