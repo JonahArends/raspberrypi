@@ -4,6 +4,7 @@
 import os
 import sys
 import signal
+import select
 import subprocess
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import FileResponse
@@ -36,8 +37,10 @@ async def run_endpoint(websocket: WebSocket):
         sp = subprocess.Popen(['python3 src/raspiProject.py --run &'], shell=True, stdout=subprocess.PIPE)
         process['id'] = sp.pid
         while True:
-            output = sp.stdout.readline().decode('utf-8')
-            await websocket.send_text(output)
+            ready = select.select([sp.stdout], [], [], 0)
+            if ready[0]:
+                output = sp.stdout.readline().decode('utf-8')
+                await websocket.send_text(output)
 
 ### STOP PROGRAMM
 @app.post('/kill')
