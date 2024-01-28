@@ -30,7 +30,7 @@ def stop_script():
 
 ### TEST SCRIPT
 @sock.route('/test')
-def start_script(ws):
+def test_script(ws):
     ws_url = f"ws://{API_BASE}/test"
     ws_client = websocket.create_connection(ws_url)
     while True:
