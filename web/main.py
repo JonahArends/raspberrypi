@@ -19,6 +19,10 @@ sock = Sock(app)
 def start_script(ws):
     ws_url = f"ws://{API_BASE}/run"
     ws_client = websocket.create_connection(ws_url)
+    if ws_client.open:
+        print("WebSocket connection successfully established.")
+    else:
+        print("Failed to establish WebSocket connection.")
     while True:
         message = ws_client.recv()
         if not ws_client.closed:
@@ -37,6 +41,10 @@ def stop_script():
 def test_script(ws):
     ws_url = f"ws://{API_BASE}/test"
     ws_client = websocket.create_connection(ws_url)
+    if ws_client.open:
+        print("WebSocket connection successfully established.")
+    else:
+        print("Failed to establish WebSocket connection.")
     while True:
         message = ws_client.recv()
         if not ws_client.closed:
