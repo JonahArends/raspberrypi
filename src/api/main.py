@@ -33,7 +33,7 @@ app = FastAPI()
 async def run_endpoint(websocket: WebSocket):
     await websocket.accept()
     if not process['id']:
-        sp = subprocess.Popen(['python3 src/raspiProject.py --run &'], stdout=subprocess.PIPE)
+        sp = subprocess.Popen(['python3 ../raspiProject.py --run &'], stdout=subprocess.PIPE)
         process['id'] = sp.pid
         while True:
             output = sp.stdout.readline().decode('utf-8')
@@ -42,7 +42,7 @@ async def run_endpoint(websocket: WebSocket):
 ### STOP PROGRAMM
 @app.post('/kill')
 async def kill():
-    subprocess.call(['python3 src/raspiProject.py --kill'], shell=True)
+    subprocess.call(['python3 ../raspiProject.py --kill'], shell=True)
     return True
 
 ### CHECK PROGRAMM STATE
