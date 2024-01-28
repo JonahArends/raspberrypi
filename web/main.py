@@ -48,14 +48,14 @@ def test_script(ws):
 ### UPDATE TEMPERATURE
 @app.route('/temperature', methods=['GET'])
 def update_temperature():
-    response = requests.get(f'{API_URL}/temperature', timeout=10)
+    response = requests.get(f'{API_URL}/temperature', timeout=30)
     temperature = f'{response.text}°C'
     return temperature
 
 ### REPORTS LIST
 @app.route('/listreports', methods=['GET'])
 def list_reports():
-    response = requests.get(f'{API_URL}/reports/list', timeout=10)
+    response = requests.get(f'{API_URL}/reports/list', timeout=30)
     data = response.txt
     return data
 
@@ -65,7 +65,7 @@ def download_files():
     checkboxes = request.get_json()
     files = []
     for checkbox in checkboxes:
-        response = requests.get(f'{API_URL}/reports/' + checkbox, timeout=10)
+        response = requests.get(f'{API_URL}/reports/' + checkbox, timeout=30)
         files.append((checkbox, response.content))
     return zip(files)
 
