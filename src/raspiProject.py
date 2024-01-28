@@ -6,6 +6,7 @@ from threading import Thread
 from time import sleep
 import RPi.GPIO as GPIO
 import subprocess
+import uvicorn
 
 from hardware import bmp280, ttp223, ky020
 from hardware.leds import LED
@@ -98,7 +99,7 @@ def main():
         print('Test runs')
     elif args.api:
         print('API runs')
-        subprocess.call(['python3', 'api/main.py'], shell=True)
+        uvicorn.run('src/api/main.py:app', host='0.0.0.0', port=8000)
     elif args.run:
         print('Script runs')
         temperature_thread = Thread(target=temperature_tasks, daemon=True)

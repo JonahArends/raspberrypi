@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+adafruit-circuitpython-bmp280
+requests
+flask
+flask-socketio
