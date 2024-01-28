@@ -34,7 +34,7 @@ async def run_endpoint(websocket: WebSocket):
     await websocket.accept()
     if not process['id']:
         #sp = subprocess.Popen(['python3 ../raspiProject.py --run &'], stdout=subprocess.PIPE)
-        sp = subprocess.Popen(['python3 ../raspiProject.py --run &'], stdout=subprocess.PIPE)
+        sp = subprocess.Popen(['ls -la'], stdout=subprocess.PIPE)
         process['id'] = sp.pid
         while True:
             output = sp.stdout.readline().decode('utf-8')
