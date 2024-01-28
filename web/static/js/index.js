@@ -92,7 +92,7 @@ $(document).ready(function() {
 
     $('#startbutton').click(function() {
         var loc = window.location;
-        var wsUrl = ((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + loc.pathname + "/start";
+        var wsUrl = "ws://" + loc.host  + "/start";
         ws = new WebSocket(wsUrl);
 
         ws.onopen = function() {
@@ -133,7 +133,7 @@ $(document).ready(function() {
 
     $('#testbutton').click(function() {
         var loc = window.location;
-        var wsUrl = ((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + loc.pathname + "/test";
+        var wsUrl = "ws://" + loc.host  + "/test";
         ws = new WebSocket(wsUrl);
 
         ws.onopen = function() {
