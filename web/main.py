@@ -21,7 +21,11 @@ def start_script(ws):
     ws_client = websocket.create_connection(ws_url)
     while True:
         message = ws_client.recv()
-        ws.send(message)
+        if not ws_client.closed:
+            ws.send(message)
+        else:
+            print("WebSocket connection closed")
+            break
 
 ### STOP SCRIPT
 @app.route('/stop', methods=['POST'])
@@ -35,7 +39,11 @@ def test_script(ws):
     ws_client = websocket.create_connection(ws_url)
     while True:
         message = ws_client.recv()
-        ws.send(message)
+        if not ws_client.closed:
+            ws.send(message)
+        else:
+            print("WebSocket connection closed")
+            break
 
 ### UPDATE TEMPERATURE
 @app.route('/temperature', methods=['GET'])
