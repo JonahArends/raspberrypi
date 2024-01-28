@@ -2,10 +2,12 @@
 
 ### IMPORTS
 import requests
+import websocket
 from flask import Flask, render_template, request
 
 ### VARS
-API_URL = 'http://127.0.0.1:5000'
+API_BASE = '127.0.0.1:5000'
+API_URL = f'http://{API_BASE}'
 
 ### APP
 app = Flask(__name__)
@@ -13,7 +15,23 @@ app = Flask(__name__)
 ### START SCRIPT
 @app.route('/script/start', methods=['GET'])
 def start_script():
-    
+    ws = websocket.create_connection("ws://API_BASE/run")
+    result = ws.recv()
+    ws.close()
+    return result
+
+### STOP SCRIPT
+@app.route('/script/stop', methods=['POST'])
+def stop_script():
+    requests.post(f'{API_URL}/kill', timeout=10)
+
+### TEST SCRIPT
+@app.route('/script/test', methods=['GET'])
+def test_script():
+    ws = websocket.create_connection("ws://API_BASE/test")
+    result = ws.recv()
+    ws.close()
+    return result
 
 ### UPDATE TEMPERATURE
 @app.route('/temperature', methods=['GET'])

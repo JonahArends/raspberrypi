@@ -40,7 +40,7 @@ async def run_endpoint(websocket: WebSocket):
             await websocket.send_text(output)
 
 ### STOP PROGRAMM
-@app.get('/kill')
+@app.post('/kill')
 async def kill():
     subprocess.call(['python3', './raspiProject.py', '--kill'], shell=True)
 

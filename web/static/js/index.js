@@ -10,7 +10,7 @@ setInterval(function() {
             console.log(error);
         }
     });
-}, 1000);
+}, 2500);
 
 $(document).on('change', '.api-checkbox', function() {
     var anyChecked = $('.api-checkbox:checked').length > 0;
@@ -85,4 +85,73 @@ $('#download-button-dialog').click(function() {
             }
         });
     }
+});
+
+$(document).ready(function() {
+    var ws;
+
+    $('#startbutton').click(function() {
+        var loc = window.location;
+        var wsUrl = ((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + loc.pathname + "/script/start";
+        ws = new WebSocket(wsUrl);
+
+        ws.onopen = function() {
+            console.log('WebSocket connection opened');
+            $('#websocket').empty();
+        };
+
+        ws.onmessage = function(event) {
+            console.log('Received data: ', event.data);
+            $('#websocket').append('<p>' + event.data + '</p>');
+        };
+
+        ws.onclose = function() {
+            console.log('WebSocket connection closed');
+        };
+
+        ws.onerror = function(error) {
+            console.log('WebSocket error: ', error);
+        };
+    });
+
+    $('#stopbutton').click(function() {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.close();
+        }
+        $('#websocket').hide();
+        $.ajax({
+            url: '/script/stop',
+            type: 'POST',
+            success: function(response) {
+                console.log('POST request successful');
+            },
+            error: function(error) {
+                console.log('POST request failed: ', error);
+            }
+        });
+    });
+
+    $('#testbutton').click(function() {
+        var loc = window.location;
+        var wsUrl = ((loc.protocol === "https:") ? "wss://" : "ws://") + loc.host + loc.pathname + "/script/start";
+        ws = new WebSocket(wsUrl);
+
+        ws.onopen = function() {
+            console.log('WebSocket connection opened');
+            $('#websocket').empty();
+        };
+
+        ws.onmessage = function(event) {
+            console.log('Received data: ', event.data);
+            $('#websocket').append('<p>' + event.data + '</p>');
+        };
+
+        ws.onclose = function() {
+            console.log('WebSocket connection closed');
+        };
+
+        ws.onerror = function(error) {
+            console.log('WebSocket error: ', error);
+        };
+    });
 });
