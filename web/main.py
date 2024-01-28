@@ -16,7 +16,10 @@ app = Flask(__name__)
 @app.route('/start', methods=['GET'])
 def start_script():
     ws = websocket.create_connection(f"ws://{API_BASE}/run")
-    result = ws.recv()
+    while True:
+        result = ws.recv()
+        if result:
+            break
     ws.close()
     return result
 
@@ -29,7 +32,10 @@ def stop_script():
 @app.route('/test', methods=['GET'])
 def test_script():
     ws = websocket.create_connection(f"ws://{API_BASE}/test")
-    result = ws.recv()
+    while True:
+        result = ws.recv()
+        if result:
+            break
     ws.close()
     return result
 
