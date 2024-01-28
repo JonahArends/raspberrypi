@@ -10,7 +10,7 @@ import uvicorn
 import sys
 
 
-sys.path.append('src')
+sys.path.append('src/hardware')
 from hardware import bmp280, ttp223, ky020
 from hardware.leds import LED
 from hardware.relais import RELAIS
