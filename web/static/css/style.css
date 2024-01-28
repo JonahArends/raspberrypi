@@ -129,18 +129,19 @@ button:hover {
 }
 
 div#scriptframe {
-    visibility: hidden;
+    /* visibility: hidden; */
     /* border: 2px solid white; */
     height: 70vh;
 }
 
-div#scriptframe iframe#mainframe {
-    border-color: white;
+div#websocket {
+    visibility: hidden;
+    border: 1px solid white;
     border-radius: 10px;
     text-align: center;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    box-sizing: border-box;
+    margin: auto;
     width: 95%;
     height: 95%;
 }
