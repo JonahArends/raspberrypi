@@ -23,13 +23,13 @@ tilt = ky020.TILT(GPIO_PINS['TILT_PIN'])
 fan = RELAIS(GPIO_PINS['FAN_PIN'])
 
 ### API
-api = FastAPI()
+app = FastAPI()
 
 ### SECURITY
 '''to do'''
 
 ### START PROGRAMM
-@api.websocket("/run")
+@app.websocket("/run")
 async def run_endpoint(websocket: WebSocket):
     await websocket.accept()
     if not process['id']:
@@ -40,7 +40,7 @@ async def run_endpoint(websocket: WebSocket):
             await websocket.send_text(output)
 
 ### STOP PROGRAMM
-@api.get('/kill')
+@app.get('/kill')
 async def kill():
     # if process['id']:
     #     os.kill(process['id'], signal.SIGTERM)
@@ -50,14 +50,14 @@ async def kill():
     return False
 
 ### CHECK PROGRAMM STATE
-@api.get('/check')
+@app.get('/check')
 async def check():
     if process['id']:
         return True
     return False
 
 ### TEST PROGRAMM
-@api.websocket("/test")
+@app.websocket("/test")
 async def test_endpoint(websocket: WebSocket):
     await websocket.accept()
     if process['id']:
@@ -70,31 +70,31 @@ async def test_endpoint(websocket: WebSocket):
             await websocket.send_text(output)
 
 ### LIST REPORTS
-@api.get('/reports/list')
+@app.get('/reports/list')
 async def list_reports():
     reports = os.listdir('src/tests/reports/')
     return reports
 
 ### GET REPORT
-@api.get('/reports/{filename}')
+@app.get('/reports/{filename}')
 async def download_report(filename: str):
     return FileResponse(path=f'src/tests/reports/{filename}', media_type='application/octet-stream')
 
 ### TEMPERATURE
-@api.get('/temperature')
+@app.get('/temperature')
 async def get_temperature():
-    temperature = bmp280.get_temperature()
+    temperature = round(bmp280.get_temperature(), 1)
     return temperature
 
 ### STATE
-@api.get('/state/touch')
+@app.get('/state/touch')
 async def get_touch_state():
     return touch.state()
 
-@api.get('/state/tilt')
+@app.get('/state/tilt')
 async def get_tilt_state():
     return tilt.state()
 
-@api.get('/state/fan')
+@app.get('/state/fan')
 async def get_fan_state():
     return fan.state()
