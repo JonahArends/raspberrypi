@@ -1,8 +1,8 @@
-fastapi[async]
+fastapi
 uvicorn
 adafruit-circuitpython-bmp280
 requests
-flask
+flask[async]
 flask-sock
 websocket-client
 gunicorn
