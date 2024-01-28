@@ -33,7 +33,7 @@ app = FastAPI()
 async def run_endpoint(websocket: WebSocket):
     await websocket.accept()
     if not process['id']:
-        subprocess.run('ls -la', shell=True)
+        subprocess.run('ls -la src/', shell=True)
         #sp = subprocess.Popen(['python3 ../raspiProject.py --run &'], stdout=subprocess.PIPE)
         #process['id'] = sp.pid
         #while True:
