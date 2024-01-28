@@ -98,6 +98,7 @@ $(document).ready(function() {
         ws.onopen = function() {
             console.log('WebSocket connection opened');
             $('#websocket').empty();
+            $('#websocket').show();
         };
 
         ws.onmessage = function(event) {
@@ -135,10 +136,11 @@ $(document).ready(function() {
         var loc = window.location;
         var wsUrl = "ws://" + loc.host  + "/test";
         ws = new WebSocket(wsUrl);
-
+        
         ws.onopen = function() {
             console.log('WebSocket connection opened');
             $('#websocket').empty();
+            $('#websocket').show();
         };
 
         ws.onmessage = function(event) {
