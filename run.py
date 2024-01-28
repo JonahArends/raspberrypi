@@ -3,6 +3,7 @@
 ### IMPORTS
 import subprocess
 from threading import Thread
+from time import sleep
 
 ### START TASKS
 def run_api():
@@ -16,4 +17,5 @@ api_thread = Thread(target=run_api)
 web_thread = Thread(target=run_web)
 
 api_thread.start()
+sleep(1)
 web_thread.start()
