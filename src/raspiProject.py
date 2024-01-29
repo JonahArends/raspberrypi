@@ -37,7 +37,7 @@ def temperature_tasks():
     with open('/home/jonah/raspberrypi/output.txt', 'w') as file:
         file.write('Temperature task runs')
         while True:
-            file.write(bmp280.get_temperature())
+            file.write(str(bmp280.get_temperature()))
             temperature = round(bmp280.get_temperature(), 1)
             if temperature < 22:
                 file.write('Temperature under 22°C')
