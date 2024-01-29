@@ -8,7 +8,7 @@ import RPi.GPIO as GPIO
 
 ### START TASKS
 def run_api():
-    with open('output.txt', 'w') as file
+    with open('output.txt', 'w') as file:
     sp = subprocess.call('uvicorn --host 0.0.0.0 --port 5000 --log-level debug --app-dir src/api main:app', shell=True, stdout=subprocess.PIPE)
     stdout, stderr = sp.communicate()
     file.write(stdout.decode())
