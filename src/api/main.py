@@ -4,7 +4,7 @@
 import os
 import sys
 import subprocess
-from fastapi import FastAPI, BackgroundTasks, status
+from fastapi import FastAPI, BackgroundTasks
 from fastapi.responses import FileResponse
 # from fastapi.middleware.cors import CORSMiddleware
 
@@ -72,6 +72,35 @@ def check():
         return True
     return False
 
+### TEMPERATURE
+@app.get('/temperature')
+def get_temperature():
+    temperature = round(bmp280.get_temperature(), 1)
+    return temperature
+
+### STATE
+@app.get('/ttp223')
+def get_touch_state():
+    if not touch.state():
+        return False
+    return True
+
+@app.get('/ky020')
+def get_tilt_state():
+    if not tilt.state():
+        return False
+    return True
+
+@app.get('/led')
+def led_state():
+    return led.active()
+
+@app.get('/fan')
+def get_fan_state():
+    if not fan.state():
+        return False
+    return True
+
 # ### LIST REPORTS
 # @app.get('/reports/list')
 # def list_reports():
@@ -82,29 +111,3 @@ def check():
 # @app.get('/reports/{filename}')
 # def download_report(filename: str):
 #     return FileResponse(path=f'src/tests/reports/{filename}', media_type='application/octet-stream')
-
-### TEMPERATURE
-@app.get('/temperature', status_code=status.HTTP_200_OK)
-def get_temperature():
-    temperature = round(bmp280.get_temperature(), 1)
-    return temperature
-
-### STATE
-@app.get('/ttp223', status_code=status.HTTP_200_OK)
-def get_touch_state():
-    if not touch.state():
-        return status.HTTP_400_BAD_REQUEST
-
-@app.get('/ky020', status_code=status.HTTP_200_OK)
-def get_tilt_state():
-    if not tilt.state():
-        return status.HTTP_400_BAD_REQUEST
-
-@app.get('/led', status_code=status.HTTP_200_OK)
-def led_state():
-    return led.active()
-
-@app.get('/fan', status_code=status.HTTP_200_OK)
-def get_fan_state():
-    if not fan.state():
-        return status.HTTP_400_BAD_REQUEST
