@@ -54,7 +54,10 @@ setInterval(function() {
                 "21": "orange"
             };
             for (var key in data) {
+                console.log(key)
                 var color = colorMapping[key];
+                console.log(color)
+                console.log(data[key])
                 if (data[key] === true) {
                     $("#led_" + color).css("background-color", color);
                 } else {
