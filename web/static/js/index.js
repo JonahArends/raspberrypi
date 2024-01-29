@@ -46,6 +46,7 @@ setInterval(function() {
         url: '/state/led',
         type: 'GET',
         success: function(data) {
+            console.log(data)
             var colorMapping = {
                 "26": "green",
                 "16": "yellow",
