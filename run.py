@@ -19,7 +19,7 @@ def main():
     web_thread = Thread(target=run_web)
 
     api_thread.start()
-    sleep(1)
+    sleep(5)
     web_thread.start()
 
 ### EXECUTE
