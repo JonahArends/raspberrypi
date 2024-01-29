@@ -8,7 +8,7 @@ import RPi.GPIO as GPIO
 
 ### START TASKS
 def run_api():
-    subprocess.call('python src/raspiProject.py --api', shell=True)
+    subprocess.call('uvicorn src.api.main:app, host=0.0.0.0, port=5000', shell=True)
 
 def run_web():
     subprocess.call('gunicorn -w 4 -b 0.0.0.0:8000 web.main:app', shell=True)

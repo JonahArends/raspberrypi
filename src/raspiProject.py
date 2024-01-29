@@ -91,7 +91,6 @@ def tilt_tasks():
 def main():
     parser = ArgumentParser()
     parser.add_argument("--test", action='store_true')
-    parser.add_argument("--api", action='store_true')
     parser.add_argument("--run", action='store_true')
     parser.add_argument("--kill", action='store_true')
     args = parser.parse_args()
@@ -99,10 +98,6 @@ def main():
 
     if args.test:
         print('Test runs')
-    elif args.api:
-        print('API runs')
-        sys.path.append('src/api')
-        uvicorn.run('api.main:app', host='0.0.0.0', port=5000)
     elif args.run:
         print('Script runs')
         temperature_thread = Thread(target=temperature_tasks, daemon=True)
