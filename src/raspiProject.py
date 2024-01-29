@@ -36,25 +36,24 @@ fan = RELAIS(GPIO_PINS['FAN_PIN'])
 def temperature_tasks():
     print('Temperature task runs')
     while True:
-        #print(bmp280.get_temperature())
+        print(bmp280.get_temperature())
         temperature = round(bmp280.get_temperature(), 1)
         if temperature < 22:
-            #print('Temperature under 22°C')
+            print('Temperature under 22°C')
             led.off(led_pin=GPIO_PINS['RED'])
             led.off(led_pin=GPIO_PINS['YELLOW'])
             led.on(led_pin=GPIO_PINS['GREEN'])
             fan.stop_while = True
             fan.off()
         elif temperature < 25:
-            #print('Temperature between 22°C and 25°C')
+            print('Temperature between 22°C and 25°C')
             led.off(led_pin=GPIO_PINS['RED'])
             led.off(led_pin=GPIO_PINS['GREEN'])
             led.on(led_pin=GPIO_PINS['YELLOW'])
             fan.stop_while = False
             fan.intervall()
         else:
-            #print('Temperature over 25°C')
-            #led.stop_while = True
+            print('Temperature over 25°C')
             led.off(led_pin=GPIO_PINS['YELLOW'])
             led.off(led_pin=GPIO_PINS['GREEN'])
             led.on(led_pin=GPIO_PINS['RED'])
