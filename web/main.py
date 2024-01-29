@@ -36,6 +36,12 @@ def update_temperature():
     temperature = f'{response.text}°C'
     return temperature
 
+### GET SENSOR STATE
+@app.route('/state/<sensor>', methods=['GET'])
+def get_state(sensor):
+    response = requests.get(f'{API_URL}/{sensor}', timeout=10)
+    return str(response.status_code)
+
 ### REPORTS LIST
 @app.route('/listreports', methods=['GET'])
 def list_reports():

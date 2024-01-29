@@ -9,7 +9,8 @@ import RPi.GPIO as GPIO
 class LED:
     def __init__(self, led_pins: list) -> None:
         GPIO.setmode(GPIO.BCM)
-        for led_pin in led_pins:
+        self.led_pins = led_pins
+        for led_pin in self.led_pins:
             GPIO.setup(led_pin, GPIO.OUT)
         self.stop_while: bool = False
 
@@ -28,3 +29,13 @@ class LED:
             sleep(sleeptime)
             GPIO.output(led_pin, GPIO.LOW)
             sleep(sleeptime)
+
+    ### CHECK LED
+    def active(self):
+        active_leds = {}
+        for led_pin in self.led_pins:
+            current_state = GPIO.input(self.led_pin)
+            if current_state == GPIO.LOW:
+                active_leds[led_pin] = False
+            active_leds[led_pin] = True
+        return active_leds

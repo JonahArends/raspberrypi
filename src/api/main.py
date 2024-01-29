@@ -3,10 +3,8 @@
 ### IMPORTS
 import os
 import sys
-import signal
-import select
 import subprocess
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI, BackgroundTasks, status
 from fastapi.responses import FileResponse
 # from fastapi.middleware.cors import CORSMiddleware
 
@@ -15,6 +13,7 @@ sys.path.append('src')
 from hardware import bmp280, ttp223, ky020
 from raspiProject import GPIO_PINS
 from hardware.relais import RELAIS
+from hardware.leds import LED
 
 ### VARS
 process = {'id': None}
@@ -23,6 +22,7 @@ process = {'id': None}
 touch = ttp223.TOUCH(GPIO_PINS['TOUCH_PIN'])
 tilt = ky020.TILT(GPIO_PINS['TILT_PIN'])
 fan = RELAIS(GPIO_PINS['FAN_PIN'])
+led = LED(led_pins=[GPIO_PINS['RED'], GPIO_PINS['YELLOW'], GPIO_PINS['GREEN'], GPIO_PINS['ORANGE']])
 
 ### API
 app = FastAPI()
@@ -72,32 +72,39 @@ def check():
         return True
     return False
 
-### LIST REPORTS
-@app.get('/reports/list')
-def list_reports():
-    reports = os.listdir('src/tests/reports/')
-    return reports
+# ### LIST REPORTS
+# @app.get('/reports/list')
+# def list_reports():
+#     reports = os.listdir('src/tests/reports/')
+#     return reports
 
-### GET REPORT
-@app.get('/reports/{filename}')
-def download_report(filename: str):
-    return FileResponse(path=f'src/tests/reports/{filename}', media_type='application/octet-stream')
+# ### GET REPORT
+# @app.get('/reports/{filename}')
+# def download_report(filename: str):
+#     return FileResponse(path=f'src/tests/reports/{filename}', media_type='application/octet-stream')
 
 ### TEMPERATURE
-@app.get('/temperature')
+@app.get('/temperature', status_code=status.HTTP_200_OK)
 def get_temperature():
     temperature = round(bmp280.get_temperature(), 1)
     return temperature
 
 ### STATE
-@app.get('/state/touch')
+@app.get('/ttp223', status_code=status.HTTP_200_OK)
 def get_touch_state():
-    return touch.state()
+    if not touch.state():
+        return status.HTTP_400_BAD_REQUEST
 
-@app.get('/state/tilt')
+@app.get('/ky020', status_code=status.HTTP_200_OK)
 def get_tilt_state():
-    return tilt.state()
+    if not tilt.state():
+        return status.HTTP_400_BAD_REQUEST
 
-@app.get('/state/fan')
+@app.get('/led', status_code=status.HTTP_200_OK)
+def led_state():
+    return led.active()
+
+@app.get('/fan', status_code=status.HTTP_200_OK)
 def get_fan_state():
-    return fan.state()
+    if not fan.state():
+        return status.HTTP_400_BAD_REQUEST
