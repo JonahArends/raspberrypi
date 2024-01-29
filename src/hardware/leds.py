@@ -32,10 +32,10 @@ class LED:
 
     ### CHECK LED
     def active(self):
-        inactive_leds = {}
+        active_leds = {}
         for led_pin in self.led_pins:
-            current_state = GPIO.output(led_pin)
-            if current_state == GPIO.LOW:
-                inactive_leds[led_pin] = True
-            inactive_leds[led_pin] = False
-        return inactive_leds
+            current_state = GPIO.input(led_pin)
+            if current_state:
+                active_leds[led_pin] = True
+            active_leds[led_pin] = False
+        return active_leds
