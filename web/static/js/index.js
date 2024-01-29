@@ -47,7 +47,6 @@ setInterval(function() {
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-            console.log(data)
             var colorMapping = {
                 "26": "green",
                 "16": "yellow",
@@ -55,10 +54,7 @@ setInterval(function() {
                 "21": "orange"
             };
             for (var key in data) {
-                console.log(key)
                 var color = colorMapping[key];
-                console.log(color)
-                console.log(data[key])
                 if (data[key] === true) {
                     $("#led_" + color).css("background-color", color);
                 } else {
