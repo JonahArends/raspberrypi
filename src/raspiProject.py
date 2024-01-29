@@ -37,7 +37,7 @@ def temperature_tasks():
     print('Temperature task runs')
     while True:
         #print(bmp280.get_temperature())
-        temperature = bmp280.get_temperature()
+        temperature = round(bmp280.get_temperature(), 1)
         if temperature < 22:
             #print('Temperature under 22°C')
             led.off(led_pin=GPIO_PINS['RED'])
@@ -45,7 +45,7 @@ def temperature_tasks():
             led.on(led_pin=GPIO_PINS['GREEN'])
             fan.stop_while = True
             fan.off()
-        elif 22 <= temperature < 25:
+        elif temperature < 25:
             #print('Temperature between 22°C and 25°C')
             led.off(led_pin=GPIO_PINS['RED'])
             led.off(led_pin=GPIO_PINS['GREEN'])
