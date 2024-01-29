@@ -32,7 +32,7 @@ app = FastAPI()
 
 ### RUN PROGRAMM
 def run_script():
-    with open('output.txt', 'w') as file:
+    with open('/raspberrypi/output.txt', 'w') as file:
         # sp = subprocess.Popen(['python3 src/raspiProject.py --run &'], shell=True, stdout=subprocess.PIPE)
         sp = subprocess.Popen(['python3 src/raspiProject.py --run &'], shell=True, stdout=file)
         process['id'] = sp.pid
