@@ -56,7 +56,7 @@ setInterval(function() {
             };
             for (var key in data) {
                 var color = colorMapping[key];
-                if (data[key]) {
+                if (data[key] === true) {
                     $("#led_" + color).css("background-color", color);
                 } else {
                     $("#led_" + color).css("background-color", 'grey');
