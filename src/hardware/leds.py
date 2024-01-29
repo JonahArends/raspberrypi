@@ -34,7 +34,7 @@ class LED:
     def active(self):
         inactive_leds = {}
         for led_pin in self.led_pins:
-            current_state = GPIO.input(led_pin)
+            current_state = GPIO.output(led_pin)
             if current_state == GPIO.LOW:
                 inactive_leds[led_pin] = True
             inactive_leds[led_pin] = False
