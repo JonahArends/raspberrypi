@@ -11,6 +11,7 @@ from fastapi.responses import FileResponse
 # from fastapi.middleware.cors import CORSMiddleware
 
 sys.path.append('src/hardware')
+sys.path.append('src')
 from hardware import bmp280, ttp223, ky020
 from raspiProject import GPIO_PINS
 from hardware.relais import RELAIS
