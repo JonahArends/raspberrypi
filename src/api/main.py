@@ -87,7 +87,7 @@ def get_touch_state():
 
 @app.get('/ky020')
 def get_tilt_state():
-    if not tilt.state():
+    if tilt.state():
         return False
     return True
 
