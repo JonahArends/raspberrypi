@@ -40,24 +40,24 @@ def update_temperature():
 @app.route('/state/<sensor>', methods=['GET'])
 def get_state(sensor):
     response = requests.get(f'{API_URL}/{sensor}', timeout=10)
-    return str(response.status_code)
+    return response.text
 
-### REPORTS LIST
-@app.route('/listreports', methods=['GET'])
-def list_reports():
-    response = requests.get(f'{API_URL}/reports/list', timeout=10)
-    data = response.txt
-    return data
+# ### REPORTS LIST
+# @app.route('/listreports', methods=['GET'])
+# def list_reports():
+#     response = requests.get(f'{API_URL}/reports/list', timeout=10)
+#     data = response.txt
+#     return data
 
-### DOWNLOAD REPORTS
-@app.route('/download_files', methods=['POST'])
-def download_files():
-    checkboxes = request.get_json()
-    files = []
-    for checkbox in checkboxes:
-        response = requests.get(f'{API_URL}/reports/' + checkbox, timeout=10)
-        files.append((checkbox, response.content))
-    return zip(files)
+# ### DOWNLOAD REPORTS
+# @app.route('/download_files', methods=['POST'])
+# def download_files():
+#     checkboxes = request.get_json()
+#     files = []
+#     for checkbox in checkboxes:
+#         response = requests.get(f'{API_URL}/reports/' + checkbox, timeout=10)
+#         files.append((checkbox, response.content))
+#     return zip(files)
 
 ### ROOT ROUTE
 @app.route('/')
