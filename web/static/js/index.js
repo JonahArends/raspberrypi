@@ -46,20 +46,20 @@ setInterval(function() {
         url: '/state/led',
         type: 'GET',
         success: function(data) {
-            data = JSON.parse(data)
-            console.log(data)
+            json_data = JSON.parse(data)
+            console.log(json_data)
             var colorMapping = {
                 "26": "green",
                 "16": "yellow",
                 "20": "red",
                 "21": "orange"
             };
-            for (var key in data) {
+            for (var key in json_data) {
                 console.log(key)
                 var color = colorMapping[key];
                 console.log(color)
-                console.log(data[key])
-                if (data[key] === true) {
+                console.log(json_data[key])
+                if (json_data[key] === true) {
                     $("#led_" + color).css("background-color", color);
                 } else {
                     $("#led_" + color).css("background-color", 'grey');
