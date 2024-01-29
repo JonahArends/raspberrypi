@@ -32,19 +32,19 @@ app = FastAPI()
 ### START PROGRAMM
 @app.post('/run')
 async def run():
-    subprocess.call(['python3 src/raspiProject.py --run'], shell=True)
+    sp = subprocess.call(['python3 src/raspiProject.py --run'], shell=True)
     return True
 
 ### STOP PROGRAMM
 @app.post('/kill')
 async def kill():
-    subprocess.call(['python3 src/raspiProject.py --kill'], shell=True)
+    sp = subprocess.call(['python3 src/raspiProject.py --kill'], shell=True)
     return True
 
 ### TEST PROGRAMM
 @app.post('/test')
 async def test():
-    subprocess.call(['python3 src/raspiProject.py --test'], shell=True)
+    sp = subprocess.call(['python3 src/raspiProject.py --test'], shell=True)
     return True
 
 ### CHECK PROGRAMM STATE
