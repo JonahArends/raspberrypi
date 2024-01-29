@@ -16,7 +16,11 @@ setInterval(function() {
         url: '/state/ky020',
         type: 'GET',
         success: function(data) {
-            $("#ky020").css("background-color", "green");
+            if (data === true) {
+                $("#ky020").css("background-color", "green");
+            } else {
+                $("#ky020").css("background-color", "red");
+            }
         },
         error: function(error) {
             $("#ky020").css("background-color", "red");
@@ -27,7 +31,11 @@ setInterval(function() {
         url: '/state/ttp223',
         type: 'GET',
         success: function(data) {
-            $("#ttp223").css("background-color", "green");
+            if (data === true) {
+                $("#ttp223").css("background-color", "green");
+            } else {
+                $("#ttp223").css("background-color", "red");
+            }
         },
         error: function(error) {
             $("#ttp223").css("background-color", "red");
@@ -36,22 +44,6 @@ setInterval(function() {
     });
     $.ajax({
         url: '/state/led',
-        type: 'GET',
-        success: function(data) {
-            for (var key in data) {
-                if (data[key] === true) {
-
-                } else if (data[key] === false) {
-
-                }
-            }
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-    $.ajax({
-        url: '/state/fan',
         type: 'GET',
         success: function(data) {
             var colorMapping = {
@@ -64,11 +56,27 @@ setInterval(function() {
                 var color = colorMapping[key];
                 if (data[key]) {
                     $("#led_" + color).css("background-color", color);
+                } else {
+                    $("#led_" + color).css("background-color", 'grey');
                 }
             }
         },
         error: function(error) {
-            $("#fan_").css("background-color", "red");
+            console.log(error);
+        }
+    });
+    $.ajax({
+        url: '/state/fan',
+        type: 'GET',
+        success: function(data) {
+            if (data === true) {
+                $("#fan").css("background-color", "green");
+            } else {
+                $("#fan").css("background-color", "red");
+            }
+        },
+        error: function(error) {
+            $("#fan").css("background-color", "red");
             console.log(error);
         }
     });
