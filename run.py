@@ -8,9 +8,7 @@ import RPi.GPIO as GPIO
 
 ### START TASKS
 def run_api():
-    with open('output.txt', 'w') as file:
-        sp = subprocess.call('uvicorn --host 0.0.0.0 --port 5000 --log-level debug --app-dir src/api main:app', shell=True, stdout=file)
-        sp.communicate()
+    subprocess.call('uvicorn --host 0.0.0.0 --port 5000 --app-dir src/api main:app', shell=True)
 
 def run_web():
     subprocess.call('gunicorn -w 4 -b 0.0.0.0:8000 web.main:app', shell=True)
