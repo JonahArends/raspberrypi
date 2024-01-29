@@ -16,7 +16,7 @@ setInterval(function() {
         url: '/state/ky020',
         type: 'GET',
         success: function(data) {
-            if (data === true) {
+            if (data === 'true') {
                 $("#ky020").css("background-color", "green");
             } else {
                 $("#ky020").css("background-color", "red");
@@ -32,7 +32,7 @@ setInterval(function() {
         type: 'GET',
         success: function(data) {
             console.log(data)
-            if (data === true) {
+            if (data === 'true') {
                 $("#ttp223").css("background-color", "green");
             } else {
                 $("#ttp223").css("background-color", "red");
@@ -56,7 +56,7 @@ setInterval(function() {
             };
             for (var key in data) {
                 var color = colorMapping[key];
-                if (data[key] === true) {
+                if (data[key] === 'true') {
                     $("#led_" + color).css("background-color", color);
                 } else {
                     $("#led_" + color).css("background-color", 'grey');
@@ -71,7 +71,7 @@ setInterval(function() {
         url: '/state/fan',
         type: 'GET',
         success: function(data) {
-            if (data === true) {
+            if (data === 'true') {
                 $("#fan").css("background-color", "green");
             } else {
                 $("#fan").css("background-color", "red");
