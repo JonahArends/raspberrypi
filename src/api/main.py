@@ -32,11 +32,9 @@ app = FastAPI()
 
 ### RUN PROGRAMM
 def run_script():
-    with open('/home/jonah/raspberrypi/output.txt', 'w') as file:
-        # sp = subprocess.Popen(['python3 src/raspiProject.py --run &'], shell=True, stdout=subprocess.PIPE)
-        sp = subprocess.Popen(['python3 src/raspiProject.py --run'], shell=True, stdout=file)
-        process['id'] = sp.pid
-        sp.communicate()
+    sp = subprocess.Popen(['python3 src/raspiProject.py --run &'], shell=True, stdout=subprocess.PIPE)
+    process['id'] = sp.pid
+    sp.communicate()
 
 ### KILL PROGRAMM
 def kill_script():
