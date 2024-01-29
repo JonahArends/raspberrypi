@@ -35,7 +35,7 @@ def run_script():
     sp = subprocess.Popen(['python3 src/raspiProject.py --run &'], shell=True, stdout=subprocess.PIPE)
     process['id'] = sp.pid
     stdout = sp.communicate()
-    print(stdout)
+    print(stdout.decode())
 
 ### KILL PROGRAMM
 def kill_script():
