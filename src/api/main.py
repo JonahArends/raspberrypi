@@ -34,7 +34,7 @@ app = FastAPI()
 def run_script():
     sp = subprocess.Popen(['python3 src/raspiProject.py --run &'], shell=True, stdout=subprocess.PIPE)
     process['id'] = sp.pid
-    stdout = sp.communicate()
+    stdout, stderr = sp.communicate()
     print(stdout.decode())
 
 ### KILL PROGRAMM
