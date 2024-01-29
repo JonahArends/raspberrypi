@@ -6,7 +6,7 @@ import sys
 import signal
 import select
 import subprocess
-from fastapi import FastAPI, WebSocket
+from fastapi import FastAPI
 from fastapi.responses import FileResponse
 # from fastapi.middleware.cors import CORSMiddleware
 
@@ -30,22 +30,21 @@ app = FastAPI()
 '''to do'''
 
 ### START PROGRAMM
-@app.websocket("/run")
-async def run_endpoint(websocket: WebSocket):
-    await websocket.accept()
-    if not process['id']:
-        sp = subprocess.Popen(['python3 src/raspiProject.py --run &'], shell=True, stdout=subprocess.PIPE)
-        process['id'] = sp.pid
-        while True:
-            ready = select.select([sp.stdout], [], [], 0)
-            if ready[0]:
-                output = sp.stdout.readline().decode('utf-8')
-                await websocket.send_text(output)
+@app.post('/run')
+async def run():
+    subprocess.call(['python3 src/raspiProject.py --run'], shell=True)
+    return True
 
 ### STOP PROGRAMM
 @app.post('/kill')
 async def kill():
     subprocess.call(['python3 src/raspiProject.py --kill'], shell=True)
+    return True
+
+### TEST PROGRAMM
+@app.post('/test')
+async def test():
+    subprocess.call(['python3 src/raspiProject.py --test'], shell=True)
     return True
 
 ### CHECK PROGRAMM STATE
@@ -54,19 +53,6 @@ async def check():
     if process['id']:
         return True
     return False
-
-### TEST PROGRAMM
-@app.websocket("/test")
-async def test_endpoint(websocket: WebSocket):
-    await websocket.accept()
-    if process['id']:
-        os.kill(process['id'], signal.SIGTERM)
-    if not process['id']:
-        sp = subprocess.Popen(['python3 src/raspiProject.py --test'], shell=True, stdout=subprocess.PIPE)
-        process['id'] = sp.pid
-        while True:
-            output = sp.stdout.readline().decode('utf-8')
-            await websocket.send_text(output)
 
 ### LIST REPORTS
 @app.get('/reports/list')

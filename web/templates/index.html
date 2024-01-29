@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="static/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
     
     <link rel="apple-touch-icon" sizes="180x180" href="static/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="static/img/favicon-32x32.png">
@@ -43,8 +44,25 @@
             <h2 id="temperature" title="Temperature by the BMP280-sensor"></h2>
         </div>
     </div>
-    <div id="scriptframe">
-        <div id="websocket"></div>
+    <div id="infoframe">
+        <div id="infos">
+            <div id="Script">
+                <h2>Script:</h2>
+                <h3 title="Stopped">- Status <span class="status" id="script">&nbsp;&nbsp;</span></h3>
+                <h3 title="Not run">- <a href="">Test <span class="status" id="test">&nbsp;&nbsp;</span></a></h3>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div id="Sensors">
+                <h2>Sensors:</h2>
+                <h3 title="Offline">- BMP280 <span class="status" id="bmp280" title="">&nbsp;&nbsp;</span></h3>
+                <h3 title="Offline">- KY020 <span class="status" id="ky020" title="">&nbsp;&nbsp;</span></h3>
+                <h3 title="Offline">- TTP223 <span class="status" id="ttp223" title="">&nbsp;&nbsp;</span> </h3>
+                <h3 title="Offline">- LED <span class="status" id="led" title="">&nbsp;&nbsp;</span> </h3>
+                <h3 title="Offline">- Fan <span class="status" id="fan" title="">&nbsp;&nbsp;</span> </h3>
+            </div>
+        </div>
     </div>
     <footer>
         <div id="madeby">

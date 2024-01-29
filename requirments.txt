@@ -2,8 +2,7 @@ fastapi
 uvicorn
 adafruit-circuitpython-bmp280
 requests
-flask[async]
-flask-sock
+flask
 websocket-client
 gunicorn
 aiohttp

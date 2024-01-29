@@ -2,11 +2,7 @@
 
 ### IMPORTS
 import requests
-import websocket
-import aiohttp
-import asyncio
 from flask import Flask, render_template, request
-from flask_sock import Sock
 
 ### VARS
 API_BASE = '127.0.0.1:5000'
@@ -14,72 +10,54 @@ API_URL = f'http://{API_BASE}'
 
 ### APP
 app = Flask(__name__)
-sock = Sock(app)
 
 ### START SCRIPT
-@sock.route('/start')
-async def start_script(ws):
-    ws_url = f"ws://{API_BASE}/run"
-    ws_client = websocket.create_connection(ws_url)
-    while True:
-        message = ws_client.recv()
-        if not ws_client.closed:
-            ws.send(message)
-        else:
-            print("WebSocket connection closed")
-            break
+@app.route('/start', methods=['POST'])
+def start_script():
+    response = requests.post(f'{API_URL}/run', timeout=10)
+    return str(response.status_code)
 
 ### STOP SCRIPT
 @app.route('/stop', methods=['POST'])
-async def stop_script():
-    requests.post(f'{API_URL}/kill', timeout=10)
-    return True
+def stop_script():
+    response =requests.post(f'{API_URL}/kill', timeout=10)
+    return str(response.status_code)
 
 ### TEST SCRIPT
-@sock.route('/test')
-async def test_script(ws):
-    ws_url = f"ws://{API_BASE}/test"
-    ws_client = websocket.create_connection(ws_url)
-    while True:
-        message = ws_client.recv()
-        if not ws_client.closed:
-            ws.send(message)
-        else:
-            print("WebSocket connection closed")
-            break
+@app.route('/test', methods=['POST'])
+def test_script():
+    response = requests.post(f'{API_URL}/test', timeout=10)
+    return str(response.status_code)
 
 ### UPDATE TEMPERATURE
 @app.route('/temperature', methods=['GET'])
-async def update_temperature():
-    async with aiohttp.ClientSession() as session:
-        async with session.get(f'{API_URL}/temperature') as resp:
-            temperature = f'{await resp.text()}°C'
-            return temperature
+def update_temperature():
+    response = requests.get(f'{API_URL}/temperature', timeout=10)
+    temperature = f'{response.text}°C'
+    return temperature
 
 ### REPORTS LIST
 @app.route('/listreports', methods=['GET'])
-async def list_reports():
-    async with aiohttp.ClientSession() as session:
-        async with session.get(f'{API_URL}/reports/list') as resp:
-            data = await resp.text()
-            return data
+def list_reports():
+    response = requests.get(f'{API_URL}/reports/list', timeout=10)
+    data = response.txt
+    return data
 
 ### DOWNLOAD REPORTS
 @app.route('/download_files', methods=['POST'])
-async def download_files():
+def download_files():
     checkboxes = request.get_json()
     files = []
-    async with aiohttp.ClientSession() as session:
-        for checkbox in checkboxes:
-            async with session.get(f'{API_URL}/reports/' + checkbox) as resp:
-                files.append((checkbox, await resp.read()))
+    for checkbox in checkboxes:
+        response = requests.get(f'{API_URL}/reports/' + checkbox, timeout=10)
+        files.append((checkbox, response.content))
     return zip(files)
 
 ### ROOT ROUTE
 @app.route('/')
-async def root():
+def root():
     return render_template('index.html')
 
 ### RUN APP
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=8000, debug=True)

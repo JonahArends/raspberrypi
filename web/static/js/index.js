@@ -87,73 +87,37 @@ $('#download-button-dialog').click(function() {
     }
 });
 
-$(document).ready(function() {
-    var ws;
-
-    $('#startbutton').click(function() {
-        var loc = window.location;
-        var wsUrl = "ws://" + loc.host  + "/start";
-        ws = new WebSocket(wsUrl);
-
-        ws.onopen = function() {
-            console.log('WebSocket connection opened');
-            $('#websocket').empty();
-            $('#websocket').show();
-        };
-
-        ws.onmessage = function(event) {
-            console.log('Received data: ', event.data);
-            $('#websocket').append('<p>' + event.data + '</p>');
-        };
-
-        ws.onclose = function() {
-            console.log('WebSocket connection closed');
-        };
-
-        ws.onerror = function(error) {
-            console.log('WebSocket error: ', error);
-        };
-    });
-
-    $('#stopbutton').click(function() {
-        if (ws && ws.readyState === WebSocket.OPEN) {
-            ws.close();
+$('#startbutton').click(function() {
+    alert("The script has been started");
+    $.ajax({
+        url: '/start',
+        type: 'POST',
+        error: function (error) {
+            console.log(error);
         }
-        $('#websocket').hide();
+    });
+});
+
+$('#stopbutton').click(function () {
+    var confirmation = confirm("The script will be stopped!");
+    if (confirmation) {
         $.ajax({
             url: '/stop',
             type: 'POST',
-            success: function(response) {
-                console.log('POST request successful');
-            },
-            error: function(error) {
-                console.log('POST request failed: ', error);
+            error: function (error) {
+                console.log(error);
             }
         });
-    });
+    }
+});
 
-    $('#testbutton').click(function() {
-        var loc = window.location;
-        var wsUrl = "ws://" + loc.host  + "/test";
-        ws = new WebSocket(wsUrl);
-        
-        ws.onopen = function() {
-            console.log('WebSocket connection opened');
-            $('#websocket').empty();
-            $('#websocket').show();
-        };
-
-        ws.onmessage = function(event) {
-            console.log('Received data: ', event.data);
-            $('#websocket').append('<p>' + event.data + '</p>');
-        };
-
-        ws.onclose = function() {
-            console.log('WebSocket connection closed');
-        };
-
-        ws.onerror = function(error) {
-            console.log('WebSocket error: ', error);
-        };
+$('#testbutton').click(function() {
+    alert("The test has been started");
+    $.ajax({
+        url: '/test',
+        type: 'POST',
+        error: function (error) {
+            console.log(error);
+        }
     });
 });

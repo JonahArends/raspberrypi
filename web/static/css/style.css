@@ -10,12 +10,12 @@ body, html {
     /* overflow: auto; */
 }
 
-body#scriptframe_body {
+body#infoframe_body {
     text-align: start;
     overflow: auto;
 }
 
-#scriptframe_body {
+#infoframe_body {
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 1px;
@@ -128,22 +128,48 @@ button:hover {
     transform: scale(1.1);
 }
 
-div#scriptframe {
-    /* visibility: hidden; */
-    /* border: 2px solid white; */
+div#infoframe {
     height: 70vh;
 }
 
-div#websocket {
-    visibility: hidden;
+div#infoframe:hover {
+    cursor: default;
+}
+
+div#infos {
+    /* visibility: hidden; */
     border: 1px solid white;
     border-radius: 10px;
-    text-align: center;
+    text-align: start;
+    padding-left: 10px;
     display: block;
     box-sizing: border-box;
     margin: auto;
     width: 95%;
     height: 95%;
+}
+
+div#infos a {
+    color: white;
+    text-decoration: none;
+}
+
+div#infos a:hover {
+    color: rgb(50, 50, 255);
+}
+
+.status {
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 25px;
+}
+
+.status#script {
+    background-color: red;
+}
+
+.status#test {
+    background-color: rgb(50, 50, 255);
 }
 
 footer {
