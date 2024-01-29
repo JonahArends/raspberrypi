@@ -26,4 +26,4 @@ def main():
 try:
     main()
 except KeyboardInterrupt:
-    GPIO.cleanup()
+    subprocess.call(['python3 src/raspiProject.py --kill'], shell=True)
