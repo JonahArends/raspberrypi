@@ -37,5 +37,6 @@ class LED:
             current_state = GPIO.input(led_pin)
             if current_state:
                 active_leds[led_pin] = True
-            active_leds[led_pin] = False
+            else:
+                active_leds[led_pin] = False
         return active_leds
