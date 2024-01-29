@@ -31,6 +31,7 @@ setInterval(function() {
         url: '/state/ttp223',
         type: 'GET',
         success: function(data) {
+            console.log(data)
             if (data === true) {
                 $("#ttp223").css("background-color", "green");
             } else {
