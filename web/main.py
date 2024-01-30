@@ -33,8 +33,10 @@ def test_script():
 @app.route('/temperature', methods=['GET'])
 def update_temperature():
     response = requests.get(f'{API_URL}/temperature', timeout=10)
-    temperature = f'{response.text}°C'
-    return temperature
+    if response.text:
+        temperature = f'{response.text}°C'
+        return temperature
+    return str(response.status_code)
 
 ### GET SENSOR STATE
 @app.route('/state/<sensor>', methods=['GET'])

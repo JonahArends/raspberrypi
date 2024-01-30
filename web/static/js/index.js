@@ -3,13 +3,20 @@ setInterval(function() {
         url: '/temperature',
         type: 'GET',
         success: function(data) {
-            $('#temperature').text('Temperature: ' + data);
-            $("#bmp280").css("background-color", "green");
+            if (data !== '403') {
+                $("#bmp280").css("background-color", "green");
+                $("#bmp280").attr("title", "Online");
+                $('#temperature').text('Temperature: ' + data);
+            } else {
+                $("#bmp280").css("background-color", "red");
+                $("#bmp280").attr("title", "Offline");
+                $('#temperature').text('Temperature: Not available!');
+            }
         },
         error: function(error) {
-            $('#temperature').text('Temperature: Not available!');
             $("#bmp280").css("background-color", "red");
-            console.log(error);
+            $("#bmp280").attr("title", "Offline");
+            $('#temperature').text('Temperature: Not available!');
         }
     });
     $.ajax({
@@ -18,13 +25,15 @@ setInterval(function() {
         success: function(data) {
             if (data === 'true') {
                 $("#ky020").css("background-color", "green");
+                $("#ky020").attr("title", "Online");
             } else {
                 $("#ky020").css("background-color", "red");
+                $("#ky020").attr("title", "Offline");
             }
         },
         error: function(error) {
             $("#ky020").css("background-color", "red");
-            console.log(error);
+            $("#ky020").attr("title", "Offline");
         }
     });
     $.ajax({
@@ -33,13 +42,15 @@ setInterval(function() {
         success: function(data) {
             if (data === 'true') {
                 $("#ttp223").css("background-color", "green");
+                $("#ttp223").attr("title", "Online");
             } else {
                 $("#ttp223").css("background-color", "red");
+                $("#ttp223").attr("title", "Offline");
             }
         },
         error: function(error) {
             $("#ttp223").css("background-color", "red");
-            console.log(error);
+            $("#ttp223").attr("title", "Offline");
         }
     });
     $.ajax({
@@ -63,7 +74,10 @@ setInterval(function() {
             }
         },
         error: function(error) {
-            console.log(error);
+            $("#led_green").css("background-color", 'grey')
+            $("#led_yellow").css("background-color", 'grey')
+            $("#led_red").css("background-color", 'grey')
+            $("#led_orange").css("background-color", 'grey');
         }
     });
     $.ajax({
@@ -72,13 +86,15 @@ setInterval(function() {
         success: function(data) {
             if (data === 'true') {
                 $("#fan").css("background-color", "green");
+                $("#fan").attr("title", "Online");
             } else {
                 $("#fan").css("background-color", "red");
+                $("#fan").attr("title", "Offline");
             }
         },
         error: function(error) {
             $("#fan").css("background-color", "red");
-            console.log(error);
+            $("#fan").attr("title", "Offline");
         }
     });
 }, 5000);
@@ -90,10 +106,11 @@ $('#startbutton').click(function() {
         type: 'POST',
         success: function (data) {
             $("#script").css("background-color", "green");
+            $("#script").attr("title", "Running");
         },
         error: function (error) {
             $("#script").css("background-color", "red");
-            console.log(error);
+            $("#script").attr("title", "Stopped");
         }
     });
 });
@@ -106,10 +123,11 @@ $('#stopbutton').click(function () {
             type: 'POST',
             success: function (data) {
                 $("#script").css("background-color", "red");
+                $("#script").attr("title", "Stopped");
             },
             error: function (error) {
-                $("#script").css("background-color", "white");
-                console.log(error);
+                $("#script").css("background-color", "red");
+                $("#script").attr("title", "Error");
             }
         });
     }
@@ -121,11 +139,12 @@ $('#testbutton').click(function() {
         url: '/test',
         type: 'POST',
         success: function (data) {
-            $("#script").css("background-color", "green");
+            $("#test").css("background-color", "green");
+            $("#test").attr("title", "Running");
         },
         error: function (error) {
-            $("#script").css("background-color", "red");
-            console.log(error);
+            $("#test").css("background-color", "red");
+            $("#test").attr("title", "Error");
         }
     });
 });

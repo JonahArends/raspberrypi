@@ -149,27 +149,10 @@ div#infos {
     height: 95%;
 }
 
-div#infos a {
-    color: white;
-    text-decoration: none;
-}
-
-div#infos a:hover {
-    color: rgb(50, 50, 255);
-}
-
 .status {
     background-color: white;
     border: 1px solid transparent;
     border-radius: 25px;
-}
-
-.status#script {
-    background-color: rgb(50, 50, 255);
-}
-
-.status#test {
-    background-color: rgb(50, 50, 255);
 }
 
 footer {
