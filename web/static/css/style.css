@@ -86,8 +86,8 @@ div#dialog button {
 
 .container {
     display: grid;
-    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 25px;
 }
 
 /* .container div {
@@ -147,6 +147,7 @@ div#infos {
     margin: auto;
     width: 95%;
     height: 95%;
+    margin-top: 25px;
 }
 
 .status {
