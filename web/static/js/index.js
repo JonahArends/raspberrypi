@@ -1,3 +1,7 @@
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 setInterval(function() {
     $.ajax({
         url: '/temperature',
@@ -17,7 +21,7 @@ setInterval(function() {
             $("#bmp280").css("background-color", "red");
             $("#bmp280").attr("title", "Offline");
             $('#temperature').text('Temperature: Not available!');
-        }
+        },
     });
     $.ajax({
         url: '/state/ky020',
@@ -100,7 +104,6 @@ setInterval(function() {
 }, 5000);
 
 $('#startbutton').click(function() {
-    alert("The script has been started");
     $.ajax({
         url: '/start',
         type: 'POST',
@@ -113,6 +116,7 @@ $('#startbutton').click(function() {
             $("#script").attr("title", "Stopped");
         }
     });
+    alert("The script has been started");
 });
 
 $('#stopbutton').click(function () {
@@ -134,19 +138,42 @@ $('#stopbutton').click(function () {
 });
 
 $('#testbutton').click(function() {
-    alert("The test has been started");
-    $.ajax({
-        url: '/test',
-        type: 'POST',
-        success: function (data) {
-            $("#test").css("background-color", "green");
-            $("#test").attr("title", "Running");
-        },
-        error: function (error) {
-            $("#test").css("background-color", "red");
-            $("#test").attr("title", "Error");
+    var confirmation = confirm(`While the test runs, the script can't be started!
+As long as the test runs, the script will be stopped!`);
+    if (confirmation) {
+        if ($("#script").css("background-color") === 'green') {
+            $.ajax({
+                url: '/stop',
+                type: 'POST',
+                success: function (data) {
+                    $("#script").css("background-color", "red");
+                    $("#script").attr("title", "Stopped");
+                },
+            });
         }
-    });
+        $("#startbutton").attr("type", "disabled")
+        $.ajax({
+            url: '/test',
+            type: 'POST',
+            success: function (data) {
+                $("#test").css("background-color", "gray");
+                $("#test").attr("title", "Running");
+                sleep(5000).then(() => {
+                    $("#test").css("background-color", "green");
+                    $("#test").attr("title", "Successful");
+                });
+            },
+            error: function (error) {
+                $("#test").css("background-color", "red");
+                $("#test").attr("title", "Error");
+            }
+        });
+        sleep(5000).then(() => { $("#startbutton").attr("type", "button") });
+    }
+});
+
+$(window).ready(function () {
+    sleep(5000).then(() => { $("#loader").fadeOut("slow") });
 });
 
 // $(document).on('change', '.api-checkbox', function() {

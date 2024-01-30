@@ -15,6 +15,14 @@ body#infoframe_body {
     overflow: auto;
 }
 
+#loader img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 8vh;
+}
+
 #infoframe_body {
     padding-left: 10px;
     padding-top: 5px;
