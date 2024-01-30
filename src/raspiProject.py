@@ -41,7 +41,6 @@ def temperature_tasks():
             led.off(led_pin=GPIO_PINS['RED'])
             led.off(led_pin=GPIO_PINS['YELLOW'])
             led.on(led_pin=GPIO_PINS['GREEN'])
-            fan.stop_while = True
             fan.off()
         elif temperature < 25:
             # print('Temperature between 22°C and 25°C')
@@ -54,8 +53,6 @@ def temperature_tasks():
             led.off(led_pin=GPIO_PINS['YELLOW'])
             led.off(led_pin=GPIO_PINS['GREEN'])
             led.on(led_pin=GPIO_PINS['RED'])
-            led.stop_while = True
-            fan.stop_while = True
             fan.on()
         sleep(0.5)
 

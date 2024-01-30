@@ -12,7 +12,6 @@ class LED:
         self.led_pins = led_pins
         for led_pin in self.led_pins:
             GPIO.setup(led_pin, GPIO.OUT)
-        self.stop_while: bool = False
 
     ### LED ON
     def on(self, *, led_pin: int):
@@ -24,11 +23,10 @@ class LED:
 
     ### LED BLINK
     def blink(self, *, led_pin: int, sleeptime: float = 0.5):
-        while not self.stop_while:
-            GPIO.output(led_pin, GPIO.HIGH)
-            sleep(sleeptime)
-            GPIO.output(led_pin, GPIO.LOW)
-            sleep(sleeptime)
+        GPIO.output(led_pin, GPIO.HIGH)
+        sleep(sleeptime)
+        GPIO.output(led_pin, GPIO.LOW)
+        sleep(sleeptime)
 
     ### CHECK LED
     def active(self):
