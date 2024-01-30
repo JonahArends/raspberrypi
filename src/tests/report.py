@@ -1,9 +1,10 @@
 ##### UNITTEST REPORT GENERATOR #####
 
 ### IMPORTS
-import csv
 import os
 import datetime
+import pdfkit
+from jinja2 import Environment, FileSystemLoader
 
 ### VARS
 FILEPATH = f'{os.path.dirname(os.path.abspath(__file__))}/reports/'

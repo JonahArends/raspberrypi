@@ -6,3 +6,5 @@ flask
 websocket-client
 gunicorn
 aiohttp
+jinja2
+pdfkit
