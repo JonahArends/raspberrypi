@@ -6,7 +6,6 @@ from threading import Thread
 from time import sleep
 import RPi.GPIO as GPIO
 import subprocess
-import uvicorn
 import sys
 
 
@@ -93,7 +92,6 @@ def main():
     parser.add_argument("--run", action='store_true')
     parser.add_argument("--kill", action='store_true')
     args = parser.parse_args()
-
 
     if args.test:
         print('Test runs')
