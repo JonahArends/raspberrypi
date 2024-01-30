@@ -11,7 +11,6 @@ class RELAIS:
         GPIO.setup(relais_pin, GPIO.OUT)
         GPIO.setmode(GPIO.BCM)
         self.relais_pin = relais_pin
-        self.stop_while: bool = False
 
     ### RELAIS ON
     def on(self):
@@ -23,11 +22,10 @@ class RELAIS:
 
     ### RELAIS INTERVALL
     def intervall(self, sleeptime: float = 10):
-        while not self.stop_while:
-            GPIO.output(self.relais_pin, GPIO.HIGH)
-            sleep(sleeptime)
-            GPIO.output(self.relais_pin, GPIO.LOW)
-            sleep(sleeptime)
+        GPIO.output(self.relais_pin, GPIO.HIGH)
+        sleep(sleeptime)
+        GPIO.output(self.relais_pin, GPIO.LOW)
+        sleep(sleeptime)
 
     ### RELAIS STATE
     def state(self):
