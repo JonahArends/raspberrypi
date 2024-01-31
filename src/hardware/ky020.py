@@ -8,7 +8,7 @@ import RPi.GPIO as GPIO
 class TILT:
     def __init__(self, tilt_pin: int) -> None:
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(tilt_pin, GPIO.IN) #, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(tilt_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         self.tilt_pin = tilt_pin
 
     def state(self) -> bool:

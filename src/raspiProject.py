@@ -93,17 +93,17 @@ def main():
         print('Test runs')
     elif args.run:
         print('Script runs')
-        temperature_thread = Thread(target=temperature_tasks, daemon=True)
-        touch_thread = Thread(target=touch_tasks, daemon=True)
         tilt_thread = Thread(target=tilt_tasks, daemon=True)
+        touch_thread = Thread(target=touch_tasks, daemon=True)
+        temperature_thread = Thread(target=temperature_tasks, daemon=True)
 
-        temperature_thread.start()
-        touch_thread.start()
         tilt_thread.start()
+        touch_thread.start()
+        temperature_thread.start()
 
-        temperature_thread.join()
-        touch_thread.join()
         tilt_thread.join()
+        touch_thread.join()
+        temperature_thread.join()
     elif args.kill:
         print('Script exists')
         GPIO.cleanup()
