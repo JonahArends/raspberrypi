@@ -13,6 +13,6 @@ class TILT:
 
     def state(self) -> bool:
         current_state = GPIO.input(self.tilt_pin)
-        if current_state == GPIO.LOW:
+        if current_state == GPIO.LOW or not current_state:
             return False
         return True
