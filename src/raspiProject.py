@@ -69,12 +69,13 @@ def touch_tasks():
 def tilt_tasks():
     print('Tilt task runs')
     while True:
-        if not tilt.state():
+        if tilt.state():
             print('Sensor tilted')
             led.blink(led_pin=GPIO_PINS['ORANGE'])
         else:
+            print('Sensor not tilted')
             led.off(led_pin=GPIO_PINS['ORANGE'])
-        sleep(0.5)
+        #sleep(0.5)
 
 ### MAIN
 def main():
