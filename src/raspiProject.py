@@ -75,7 +75,7 @@ def tilt_tasks():
         else:
             print('Sensor not tilted')
             led.off(led_pin=GPIO_PINS['ORANGE'])
-        #sleep(0.5)
+        sleep(0.5)
 
 ### MAIN
 def main():
