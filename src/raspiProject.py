@@ -73,7 +73,6 @@ def tilt_tasks():
             print('Sensor tilted')
             led.blink(led_pin=GPIO_PINS['ORANGE'])
         else:
-            print('Sensor not tilted')
             led.off(led_pin=GPIO_PINS['ORANGE'])
         sleep(0.5)
 
